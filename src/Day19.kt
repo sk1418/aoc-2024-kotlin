@@ -1,4 +1,4 @@
-// https://adventofcode.com/2023/day/19
+// https://adventofcode.com/2024/day/19
 fun main() {
     val today = "Day19"
 

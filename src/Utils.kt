@@ -20,13 +20,15 @@ fun readInputAsInts(name: String) = File("src/inputs", "$name.txt").readLines().
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
 
 fun chkTestInput(actual: Number, expect: Number, part: String) {
-    println("[TEST::$part]: $actual").also {
+    print("[TEST::$part]: $actual").also {
+        println(if (actual == expect) " ✅" else " ❌ Should be:$expect")
         check(actual == expect)
     }
 }
 
 fun chkTestInput(actual: String, expect: String, part: String) {
-    println("[TEST::$part]: $actual").also {
+    print("[TEST::$part]: $actual").also {
+        println(if (actual == expect) " ✅" else " ❌ Should be:$expect")
         check(actual == expect)
     }
 }
@@ -70,6 +72,7 @@ open class Matrix<T : Any>(val maxX: Int, val maxY: Int, open val points: Map<Pa
 
 enum class Direction {
     Left, Up, Right, Down;
+
     fun turn90() = ordinal.let { entries[if (it == 3) 0 else it + 1] }
     fun turn90Back() = ordinal.let { entries[if (it == 0) 3 else it - 1] }
 }
