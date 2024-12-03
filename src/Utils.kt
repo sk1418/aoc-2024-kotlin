@@ -18,16 +18,16 @@ fun String.toInts(sep: String = " ") = split(sep).map { it.toInt() }
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
 
 fun chkTestInput(actual: Number, expect: Number, part: String) {
-    print("[TEST::$part]: $actual").also {
-        println(if (actual == expect) " ✅" else " ❌ Should be:$expect")
-        check(actual == expect)
+    print("[TEST::$part]: $actual ").also {
+        println(if (actual == expect)  "✅" else "❌ Should be:$expect")
+        assert(actual == expect){"\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... "}
     }
 }
 
 fun chkTestInput(actual: String, expect: String, part: String) {
-    print("[TEST::$part]: $actual").also {
-        println(if (actual == expect) " ✅" else " ❌ Should be:$expect")
-        check(actual == expect)
+    print("[TEST::$part]: $actual ").also {
+        println(if (actual == expect) "✅" else "❌ Should be:$expect")
+        assert(actual == expect){"\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... "}
     }
 }
 
