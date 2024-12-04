@@ -19,15 +19,15 @@ fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest
 
 fun chkTestInput(actual: Number, expect: Number, part: String) {
     print("[TEST::$part]: $actual ").also {
-        println(if (actual == expect)  "✅" else "❌ Should be:$expect")
-        assert(actual == expect){"\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... "}
+        println(if (actual == expect) "✅" else "❌ Should be:$expect")
+        assert(actual == expect) { "\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... " }
     }
 }
 
 fun chkTestInput(actual: String, expect: String, part: String) {
     print("[TEST::$part]: $actual ").also {
         println(if (actual == expect) "✅" else "❌ Should be:$expect")
-        assert(actual == expect){"\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... "}
+        assert(actual == expect) { "\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... " }
     }
 }
 
@@ -52,6 +52,7 @@ class NotNullMap<K, V>(private val map: Map<K, V>) : Map<K, V> by map {
 fun List<Char>.joinChars() = joinToString(separator = "") { "$it" }
 open class Matrix<T : Any>(val maxX: Int, val maxY: Int, open val points: Map<Pair<Int, Int>, T>) {
 
+    protected fun Pair<Int, Int>.validPoint() = first in 0..maxX && second in 0..maxY
     protected fun Pair<Int, Int>.move(direction: Direction) = when (direction) {
         Up -> first to (second - 1)
         Down -> first to (second + 1)
