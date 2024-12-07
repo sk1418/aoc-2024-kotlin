@@ -16,11 +16,11 @@ fun main() {
         }
     }
 
-    chkTestInput(part1(testInput), 2, Part1)
-    println("[Part1]: ${part1(input)}")
+    chkTestInput(Part1, testInput, 2) { part1(it) }
+    solve(Part1, input) { part1(it) }
 
-    chkTestInput(part2(testInput), 4, Part2)
-    println("[Part2]: ${part2(input)}")
+    chkTestInput(Part2, testInput, 4) { part2(it) }
+    solve(Part2, input) { part2(it) }
 }
 
 private fun List<Int>.isSafe() = windowed(2).map { (a, b) -> a - b }.let {

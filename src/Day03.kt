@@ -20,9 +20,9 @@ fun main() {
         return mulRe.findAll(enabledLine).map { mul(it.groupValues[1]) }.sum()
     }
 
-    chkTestInput(part1(testInput), 161L, Part1)
-    println("[Part1]: ${part1(input)}")
+    chkTestInput(Part1, testInput, 161L) { part1(it) }
+    solve(Part1, input) { part1(it) }
 
-    chkTestInput(part2(testInputPart2), 48L, Part2)
-    println("[Part2]: ${part2(input)}")
+    chkTestInput(Part2, testInputPart2, 48L) { part2(it) }
+    solve(Part2, input) { part2(it) }
 }

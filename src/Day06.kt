@@ -26,11 +26,11 @@ fun main() {
         }
     }
 
-    chkTestInput(part1(testInput), 41, Part1)
-    println("[Part1]: ${part1(input)}")
+    chkTestInput(Part1, testInput, 41) { part1(it) }
+    solve(Part1, input) { part1(it) }
 
-    chkTestInput(part2(testInput), 6, Part2)
-    println("[Part2]: ${part2(input)}")
+    chkTestInput(Part2, testInput, 6) { part2(it) }
+    solve(Part2, input) { part2(it) }
 }
 
 class MatrixDay06(maxX: Int, maxY: Int, override val points: NotNullMap<Pair<Int, Int>, Char>) : Matrix<Char>(maxX, maxY, points) {

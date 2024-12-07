@@ -18,11 +18,11 @@ fun main() {
 
     fun part2(input: List<String>): Int = toMatrix(input).countMasInX
 
-    chkTestInput(part1(testInput), 18, Part1)
-    println("[Part1]: ${part1(input)}")
+    chkTestInput(Part1, testInput, 18) { part1(it) }
+    solve(Part1, input) { part1(it) }
 
-    chkTestInput(part2(testInput), 9, Part2)
-    println("[Part2]: ${part2(input)}")
+    chkTestInput(Part2, testInput, 9) { part2(it) }
+    solve(Part2, input) { part2(it) }
 }
 
 class MatrixDay04(maxX: Int, maxY: Int, override val points: NotNullMap<Pair<Int, Int>, Char>) : Matrix<Char>(maxX, maxY, points) {

@@ -3,6 +3,7 @@ import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 import java.util.*
+import kotlin.time.measureTime
 
 const val Part1 = "Part 1"
 const val Part2 = "Part 2"
@@ -19,12 +20,16 @@ fun String.toInts(sep: String = " ") = split(sep.toRegex()).map { it.toInt() }
 fun String.toLongs(sep: String = " ") = split(sep.toRegex()).map { it.toLong() }
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
 
-fun <T> chkTestInput(actual: T, expect: T, part: String) {
-    print("[TEST::$part]: $actual ").also {
-        println(if (actual == expect) "✅" else "❌ Should be:$expect")
-        check(actual == expect) { "\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... " }
-    }
-}
+fun <T> chkTestInput(part: String, testInput: List<String>, expected: T, solveIt: (List<String>) -> T) = measureTime {
+    val actual = solveIt(testInput)
+    print("[ TEST ::$part]: $actual ${if (actual == expected) "✅" else "❌ Should be: $expected  "}")
+    check(actual == expected) { "\n\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... " }
+}.also { time -> println("    (${time})") }
+
+fun <T> solve(part: String, input: List<String>, solveIt: (List<String>) -> T) = measureTime {
+    val result = solveIt(input)
+    print("[RESULT::$part]: $result")
+}.also { time -> println("    (${time})\n") }
 
 fun <T> List<List<T>>.transpose(): List<List<T>> {
     val result = (first().indices).map { mutableListOf<T>() }.toMutableList()

@@ -19,9 +19,9 @@ fun main() {
         return leftList.sumOf { it * rightMap.getOrDefault(it, 0) }
     }
 
-    chkTestInput(part1(testInput), 11, Part1)
-    println("[Part1]: ${part1(input)}")
+    chkTestInput(Part1, testInput, 11) { part1(it) }
+    solve(Part1, input) { part1(it) }
 
-    chkTestInput(part2(testInput), 31, Part2)
-    println("[Part2]: ${part2(input)}")
+    chkTestInput(Part2, testInput, 31) { part2(it) }
+    solve(Part2, input) { part2(it) }
 }
