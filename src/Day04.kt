@@ -26,8 +26,8 @@ fun main() {
 }
 
 class MatrixDay04(maxX: Int, maxY: Int, override val points: NotNullMap<Pair<Int, Int>, Char>) : Matrix<Char>(maxX, maxY, points) {
-    private val allX = withValue('X').keys
-    private val allA = withValue('A').keys
+    private val allX = findByValue('X')
+    private val allA = findByValue('A')
 
     val countXMAS = allX.sumOf { x ->
         listOf(x.lWord(), x.rWord(), x.uWord(), x.dWord(), x.luWord(), x.ldWord(), x.ruWord(), x.rdWord()).count { it == "XMAS" }

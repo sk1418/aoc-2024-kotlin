@@ -75,8 +75,8 @@ class NotNullMap<K, V>(private val map: Map<K, V>) : Map<K, V> by map {
 //Matrix related:
 open class Matrix<T : Any>(val maxX: Int, val maxY: Int, open val points: Map<Pair<Int, Int>, T>) {
 
-    protected infix fun singleWithValue(value: T) = points.entries.first { it.value == value }
-    protected infix fun withValue(value: T) = points.filterValues { it == value }
+    protected fun findOneByValue(value: T) = points.entries.first { it.value == value }.key
+    protected fun findByValue(value: T) = points.filterValues { it == value }.keys
 
     protected fun Pair<Int, Int>.validPoint() = first in 0..maxX && second in 0..maxY
     operator fun contains(pos: Pair<Int, Int>) = pos.validPoint()

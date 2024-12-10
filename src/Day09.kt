@@ -52,7 +52,7 @@ data class DiskDay09(val line: String) {
                 val requiredFileCnt = min(fileBlockCnt - allocatedBlocks, fileBlk.blocks)
                 repeat(requiredFileCnt) { add(fileBlk.id) }
                 allocatedBlocks += requiredFileCnt
-                
+
                 val requiredSpaceCnt = min(fileBlockCnt - allocatedBlocks, spaceList[fileBlk.id].blocks)
                 if (requiredSpaceCnt > 0) {
                     repeat(requiredSpaceCnt) { add(fillSeq.removeLast()) }

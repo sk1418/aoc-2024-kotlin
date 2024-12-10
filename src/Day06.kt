@@ -34,7 +34,7 @@ fun main() {
 }
 
 class MatrixDay06(maxX: Int, maxY: Int, override val points: NotNullMap<Pair<Int, Int>, Char>) : Matrix<Char>(maxX, maxY, points) {
-    val start = singleWithValue('^').key
+    val start = findOneByValue('^')
 
     fun newMatrixWithNewObstruction(pos: Pair<Int, Int>): MatrixDay06 =
         MatrixDay06(maxX, maxY, NotNullMap(points.toMutableMap().also { it[pos] = '#' }))
