@@ -1,10 +1,7 @@
 import Direction.*
 import java.io.File
 import java.util.*
-import kotlin.time.measureTime
-
-const val Part1 = "Part 1"
-const val Part2 = "Part 2"
+import kotlin.time.measureTimedValue
 
 /**
  * Reads lines from the given input txt file.
@@ -17,18 +14,16 @@ fun readInputAsInts(name: String) = File("src/inputs", "$name.txt").readLines().
 fun String.toInts(sep: String = " ") = split(sep.toRegex()).map { it.toInt() }
 fun String.toLongs(sep: String = " ") = split(sep.toRegex()).map { it.toLong() }
 
-fun <T : Any?> T.alsoLog(prefix:String = "${this!!::class.simpleName}") = this.also { println("[$prefix] $it") }
+fun <T : Any?> T.alsoLog(prefix: String = "${this!!::class.simpleName}") = this.also { println("[$prefix] $it") }
 
-fun <T> chkTestInput(part: String, testInput: List<String>, expected: T, solveIt: (List<String>) -> T) = measureTime {
-    val actual = solveIt(testInput)
-    print("[ TEST ::$part]: $actual ${if (actual == expected) "✅" else "❌ Should be: $expected  "}")
-    check(actual == expected) { "\n\uD83D\uDE21\uD83D\uDE21\uD83D\uDE21 Oops... " }
-}.also { time -> println("    (${time})") }
+fun <T> chkTestInput(part: String, testInput: List<String>, expected: T, solveIt: (List<String>) -> T) = measureTimedValue { solveIt(testInput) }
+    .also { (actual, time) ->
+        println("$CYAN[ TEST ::$part]$RESET: $actual  ${if (actual == expected) "${CYAN}✔$RESET" else "$RED✘$RESET Should be: $RED$expected$RESET  "}    ($time)")
+        check(actual == expected)
+    }
 
-fun <T> solve(part: String, input: List<String>, solveIt: (List<String>) -> T) = measureTime {
-    val result = solveIt(input)
-    print("[RESULT::$part]: $result")
-}.also { time -> println("    (${time})\n") }
+fun <T> solve(part: String, input: List<String>, solveIt: (List<String>) -> T) = measureTimedValue { solveIt(input) }
+    .also { (result, time) -> println("$BLUE[RESULT::$part]$RESET: $result    ($time)\n") }
 
 // list
 fun List<Char>.joinChars() = joinToString(separator = "") { "$it" }
@@ -102,3 +97,11 @@ enum class Direction {
     fun turn90() = ordinal.let { entries[if (it == 3) 0 else it + 1] }
     fun turn90Back() = ordinal.let { entries[if (it == 0) 3 else it - 1] }
 }
+
+const val Part1 = "Part 1"
+const val Part2 = "Part 2"
+
+const val RESET = "\u001B[0m"
+const val RED = "\u001B[31m"
+const val BLUE = "\u001B[34m"
+const val CYAN = "\u001B[36m"
