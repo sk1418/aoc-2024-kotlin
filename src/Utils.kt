@@ -18,12 +18,12 @@ fun <T : Any?> T.alsoLog(prefix: String = "${this!!::class.simpleName}") = this.
 
 fun <T> chkTestInput(part: String, testInput: List<String>, expected: T, solveIt: (List<String>) -> T) = measureTimedValue { solveIt(testInput) }
     .also { (actual, time) ->
-        println("$CYAN[ TEST ::$part]$RESET: $actual  ${if (actual == expected) "${CYAN}✔$RESET" else "$RED✘$RESET Should be: $RED$expected$RESET  "}    ($time)")
+        println("$CYAN[$part::: TEST ]$RESET: $actual  ${if (actual == expected) "${CYAN}✔$RESET" else "$RED✘$RESET Should be: $RED$expected$RESET  "}    ($time)")
         check(actual == expected)
     }
 
 fun <T> solve(part: String, input: List<String>, solveIt: (List<String>) -> T) = measureTimedValue { solveIt(input) }
-    .also { (result, time) -> println("$BLUE[RESULT::$part]$RESET: $result    ($time)\n") }
+    .also { (result, time) -> println("$BLUE[$part:::RESULT]$RESET: $result    ($time)\n") }
 
 // list
 fun List<Char>.joinChars() = joinToString(separator = "") { "$it" }
@@ -89,11 +89,18 @@ open class Matrix<T : Any>(val maxX: Int, val maxY: Int, open val points: Map<Pa
         Right -> (((first + 1).takeIf { it <= maxX } ?: maxX) to second)
     }
 
+    protected fun Pair<Int, Int>.allAround() =
+        listOf(
+            move(Up), move(Left), move(Down), move(Right),
+            move(Up).move(Left), move(Up).move(Right), move(Down).move(Left), move(Down).move(Right)
+        ).filter { it.validPoint() }
+
 }
 
 enum class Direction {
     Left, Up, Right, Down;
 
+    fun opposite() = ordinal.let { entries[(it + 2).let { if (it > 3) it - 4 else it }] }
     fun turn90() = ordinal.let { entries[if (it == 3) 0 else it + 1] }
     fun turn90Back() = ordinal.let { entries[if (it == 0) 3 else it - 1] }
 }
