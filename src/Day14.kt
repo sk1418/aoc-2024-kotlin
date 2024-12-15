@@ -42,7 +42,7 @@ private data class MatrixDay14(val maxX: Int, val maxY: Int, val robots: List<Ro
         var s = 0
         while (true) {
             s++
-            if (robots.onEach { it.move() }.groupBy { it.pos }.keys.size == robots.size) break
+            if (robots.onEach { it.move() }.distinctBy { it.pos }.size == robots.size) break
         }
         return s
     }
