@@ -1,6 +1,7 @@
 import Direction.*
 import java.io.File
 import java.util.*
+import kotlin.math.pow
 import kotlin.time.measureTimedValue
 
 /**
@@ -13,6 +14,8 @@ fun readInputAsInts(name: String) = File("src/inputs", "$name.txt").readLines().
 
 fun String.toInts(sep: String = " ") = split(sep.toRegex()).map { it.toInt() }
 fun String.toLongs(sep: String = " ") = split(sep.toRegex()).map { it.toLong() }
+infix fun Int.pow(exponent: Int): Int = toDouble().pow(exponent).toInt()
+infix fun Long.pow(exponent: Long): Long = toDouble().pow(exponent.toDouble()).toLong()
 
 fun <T : Any?> T.alsoLog(prefix: String = "${this!!::class.simpleName}", msg: (T) -> String = { t: T -> "$t" }) = apply { println("[$prefix] ${msg(this)}") }
 
