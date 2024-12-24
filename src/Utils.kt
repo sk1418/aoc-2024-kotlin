@@ -64,6 +64,7 @@ class MutableNotNullMap<K, V>(private val map: MutableMap<K, V>) : MutableMap<K,
     }
 }
 
+fun <K, V> Map<K, V>.toNotNullMap() = NotNullMap(this)
 class NotNullMap<K, V>(private val map: Map<K, V>) : Map<K, V> by map {
     override operator fun get(key: K): V {
         return checkNotNull(map[key]) { "Key ($key) not found in the NeverNullMap" }

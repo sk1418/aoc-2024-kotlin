@@ -31,7 +31,8 @@ fun main() {
 
 }
 
-private fun Set<String>.connected(dict: NotNullMap<String, Set<String>>) = map { dict[it] }.reduce(Set<String>::intersect)
+private fun Set<String>.connected(dict: NotNullMap<String, Set<String>>) =
+    map { dict[it] }.reduce(Set<String>::intersect)
 
 private fun Set<Set<String>>.moreConnectedNodes(dict: NotNullMap<String, Set<String>>): Set<Set<String>> {
     return flatMap { set1 ->
