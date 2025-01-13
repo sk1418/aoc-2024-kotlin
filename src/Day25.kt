@@ -4,7 +4,7 @@ fun main() {
 
     val input = readInput(today)
     val testInput = readTestInput(today)
-    
+
     fun parseLocksAndKeys(input: List<String>): Pair<List<Set<Pair<Int, Int>>>, List<Set<Pair<Int, Int>>>> {
         val (locks, keys) = mutableListOf<Set<Pair<Int, Int>>>() to mutableListOf<Set<Pair<Int, Int>>>()
         var theInput = input
